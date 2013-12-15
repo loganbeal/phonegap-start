@@ -8,226 +8,65 @@
 	body {
 	background-color: pink;
 	}
+	.circle{-webkit-tap-highlight-color: rgba(0,0,0,0); width:255px;height:250px;border-radius:125px; background: transparent; border: none !important; position:fixed; top: 300px; left: 50px;}
+	.active {display: none !important;}
 	</style>
+	
 </head>
-    <body>
+    <body onload="onload();">
         <script type="text/javascript" src="cordova-2.7.0.js"></script>
         <script type="text/javascript" src="/test/assets/www/js/index.js"></script>
         <script type="text/javascript" src="/test/assets/www/js/user.js"></script>
         <script type="text/javascript">
             app.initialize();
-        </script>
-        <h1 style="text-align:center">Let's Eat!</h1><br>
+            document.addEventListener('deviceready', deviceready, false);
 
-		<p id="demo">Ready?</p><br><br><br><br>
+			function deviceready() {
+				console.log('deviceready');
+			}
+        </script>
+        <h1 style="text-align:center; font-size: 60px">Let's Eat!</h1>
+
+		<p style="font-size: 30px"id="demo">Ready?</p><br><br>
 		
-		<button id="button" onmousedown="button()" onmouseup="myFunction()" style="color:pink"><img src='img/up.png'></button>
-		
+		<button id="down" class="circle "><img src="img/down.png"></button>
+		<button id="myBtn" class="circle"><img src="img/up.png"></button>
+
 		<script>
-		function button()
+		function onload() {
+		document.getElementById("myBtn").addEventListener('touchstart',changebtn, false);
+		document.getElementById("myBtn").addEventListener('touchend',myFunction, false);
+		document.getElementById("myBtn").addEventListener('touchcancel',changeback, false);
+		
+		
+		function changeback() 
 		{
-		document.getElementById("button").innerHTML="<img src='img/down.png'>";
+		document.getElementById("myBtn").innerHTML="<img src='img/up.png'>";
+		} 
+		
+		function changebtn() 
+		{
+		document.getElementById("myBtn").classList.add('active');
 		}
+		
+		//document.getElementById("myBtn").onclick=function(){myFunction()};
 		function myFunction()
 		{
-		document.getElementById("button").innerHTML="<img src='img/up.png'>";
-		var one = Math.floor((Math.random()*196));
-		var two = Math.floor((Math.random()*196));
+		//document.getElementById("myBtn").innerHTML="<img src='img/up.png'>";
+		document.getElementById("myBtn").classList.remove('active');
+		var one = Math.floor((Math.random()*195));
+		var two = Math.floor((Math.random()*195));
 		while (one == two)
-		{
-		two = Math.floor((Math.random()*196));
-		}
-		var foods=["chicken ","beef ","cheese ","hotdog ","bread ","potato ","oats ","ham ","beans ","rice ","chips ","Ground Beef",
-"Steak",
-"Chicken",
-"Lamb",
-"Pork Chop",
-"Bacon",
-"Ham",
-"Turkey",
-"Salmon",
-"Cod",
-"Talapia",
-"Tuna",
-"Mussels",
-"Crab",
-"Shrimp",
-"Spaghetti",
-"Linguini",
-"Rotini",
-"asparagus",
-"apples",
-"avacado",
-"alfalfa",
-"acorn squash  ",
-"almond",
-"arugala",
-"artichoke",
-"applesauce",
-"asian noodles ",
-"antelope",
-"ahi tuna ",
-"albacore tuna",
-"Apple juice",
-"Avocado roll",
-"Bruscetta",
-"bacon",
-"black beans",
-"bagels",
-"baked beans",
-"BBQ",
-"bison",
-"barley",
-"beer",
-"bisque",
-"bluefish",
-"bread",
-"broccoli",
-"buritto",
-"babaganoosh",
-"Cabbage",
-"cake",
-"carrots",
-"carne asada",
-"celery",
-"cheese",
-"chicken",
-"catfish",
-"chips",
-"chocolate",
-"chowder",
-"clams",
-"coffee",
-"cookies",
-"corn",
-"cupcakes",
-"crab",
-"curry",
-"cereal",
-"chimichanga",
-"dates",
-"dips",
-"duck",
-"dumplings",
-"donuts",
-"eggs",
-"enchilada",
-"eggrolls",
-"English muffins",
-"edimame",
-"eel sushi",
-"fajita",
-"falafel",
-"fish",
-"franks",
-"fondu",
-"French toast",
-"French dip",
-"Garlic",
-"ginger",
-"gnocchi",
-"goose",
-"granola",
-"grapes",
-"green beans",
-"Guancamole",
-"gumbo",
-"grits",
-"Graham crackers",
-"ham",
-"halibut",
-"hamburger (and cheeseburgers and bacon cheeseburgers)",
-"honey",
-"huenos rancheros",
-"hash browns",
-"hot dogs",
-"haiku roll",
-"hummus",
-"ice cream",
-"Irish stew",
-"Indian food",
-"Italian bread",
-"jambalaya",
-"jelly / jam",
-"jerky",
-"jalapeño",
-"kale",
-"kabobs",
-"ketchup",
-"kiwi",
-"kidney beans",
-"kingfish",
-"lobster",
-"Lamb",
-"Linguine",
-"Lasagna",
-"Meatballs",
-"Moose",
-"Milk",
-"Milkshake",
-"Noodles",
-"Ostrich",
-"Pizza",
-"Pepperoni",
-"Porter",
-"Pancakes",
-"Quesadilla",
-"Quiche",
-"Reuben",
-"Spinach",
-"Spaghetti",
-"Tater tots",
-"Toast",
-"Venison",
-"Waffles",
-"Wine",
-"Walnuts",
-"Yogurt",
-"Ziti",
-"Zucchini",
-"bannana",
-"peanut butter",
-"french fries",
-"marshmallow",
-"tortilla",
-"pickle",
-"tomatoe",
-"onion",
-"ramen",
-"rice",
-"brown rice",
-"sugar",
-"radish",
-"raisin",
-"raspberry",
-"strawberry",
-"blackberry",
-"blueberry",
-"blackcurrant",
-"rhubarb",
-"cavier",
-"roe",
-"ribs",
-"salt",
-"sardine",
-"sausage",
-"oatmeal",
-"brown sugar",
-"sea weed",
-"tofu",
-"potatoe",
-"chili",
-"sage",
-"saffron",
-"pumpkin",
-"parsley",
-"basil",];
+			{
+				two = Math.floor((Math.random()*195));
+			}
+		var foods=["chicken ","beef ","cheese ","hotdog ","bread ","potato ","oats ","ham ","beans ","rice ","chips ","Ground Beef","Steak","Chicken","Lamb","Pork Chop","Bacon","Ham","Turkey","Salmon","Cod","Talapia","Tuna","Mussels","Crab","Shrimp","Spaghetti","Linguini","Rotini","asparagus","apples","avacado","alfalfa","acorn squash","almond","arugala","artichoke","applesauce","asian noodles ","antelope","ahi tuna ","albacore tuna","Apple juice","Avocado roll","Bruscetta","bacon","black beans","bagels","baked beans","BBQ","bison","barley","beer","bisque","bluefish","bread","broccoli","burritto","babaganoosh","Cabbage","cake","carrots","carne asada","celery","cheese","chicken","catfish","chips","chocolate","chowder","clams","cookies","corn","cupcakes","crab","curry","cereal","chimichanga","dates","dips","duck","dumplings","donuts","eggs","enchilada","eggrolls","English muffins","edimame","eel sushi","fajita","falafel","fish","franks","fondu","French toast","French dip","Garlic","ginger","gnocchi","goose","granola","grapes","green beans","Guancamole","gumbo","grits","Graham crackers","ham","halibut","hamburger","honey","huenos rancheros","hash browns","hot dogs","haiku roll","hummus","ice cream","Irish stew","Indian food","Italian bread","jambalaya","jam","jerky","jalapeño","kale","kabobs","ketchup","kiwi","kidney beans","kingfish","lobster","Lamb","Linguine","Lasagna","Meatballs","Moose","Milk","Milkshake","Noodles","Ostrich","Pizza","Pepperoni","Porter","Pancakes","Quesadilla","Quiche","Reuben","Spinach","Spaghetti","Tater tots","Toast","Venison","Waffles","Wine","Walnuts","Yogurt","Ziti","Zucchini","bannana","peanut butter","french fries","marshmallow","tortilla","pickle","tomatoe","onion","ramen","rice","brown rice","sugar","radish","raisin","raspberry","strawberry","blackberry","blueberry","blackcurrant","rhubarb","cavier","roe","ribs","salt","sardine","sausage","oatmeal","brown sugar","sea weed","tofu","potatoe","chili","sage","saffron","pumpkin","parsley","basil"];
 		var first = foods[one];
 		var second = foods[two];
 		document.getElementById("demo").innerHTML="Dinner: " + first + " and " + second;
+		};
 		}
 		</script>
 
     </body>
 </html>
-
